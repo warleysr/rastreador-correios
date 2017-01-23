@@ -1,6 +1,8 @@
 # Rastreador Correios
 Extensão para rastrear suas encomendas de forma simples e notificá-lo quando elas movimentarem.
 
+• Verificações minuto a minuto
+
 • Suporte à códigos ilimitados e identificadores
 
 ![alt tag](http://image.prntscr.com/image/343e6c09f1fe4a76a5a73c12a532406f.png)
