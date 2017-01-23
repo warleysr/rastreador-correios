@@ -24,13 +24,13 @@ Extensão para rastrear suas encomendas de forma simples e notificá-lo quando e
 ![alt tag](http://image.prntscr.com/image/ae4a5e051d604e0cbd583a9dce0f10bd.png)
 
 ## Instalação
-• Baixe a última versão em [/releases](https://github.com/zDubsCrazy/rastreador-correios/releases)
+• Baixe este repositório como ZIP
 
 • No Chrome, vá em "Configurações" > "Extensões"
 
-• Habilite o modo do desenvolvedor (isso é necessário pois o Chrome irá desativar qualquer extensão que não tenha sido instalada na Chrome Web Store)
+• Habilite o modo do desenvolvedor (isso é necessário para instalar extensões não compactadas)
 
-• Arraste o arquivo .crx baixado para essa tela e solte
+• Clique em "Carregar extensão expandida..." e selecione a pasta que contém os arquivos
 
 • Pronto!
 
