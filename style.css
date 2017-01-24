@@ -1,18 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+* {
+	font-family: 'Roboto', sans-serif;
+	text-decoration: none;
+}
 body {
-	min-width: 260px;
+	min-width: 208px;
 }
 .btn {
-	background-color: #d1080f;
+	background-color: #e74c3c;
 	border: none;
 	height: 35px;
 	padding: 5px 15px;
 	color: #ffffff;
 	font-size: 16px;
 	font-weight: 300;
-	font-family: "Comic Sans MS";
 	margin-top: 10px;
 	margin-right: 10px;
-	border-radius: 7px;
 }
 .btn:hover {
 	cursor: pointer;
@@ -22,34 +25,35 @@ body {
 	outline: 0;
 }
 .form-control {
-	height: 25px;
-	padding: 5px 15px;
+	width: 175px;
+	padding: 5px 10px;
 	font-size: 16px;
 	font-weight: 300;
-	font-family: "Comic Sans MS";
 	border: 1px solid black;
-	border-radius: 7px;
 }
 .form-control:focus {
 	outline: 0;
-	border-color: #28c2ed;
+	border-color: #e74c3c;
+}
+.form-control::-webkit-input-placeholder {
+	text-transform: uppercase;
 }
 .info {
 	font-size: 16px;
 	font-weight: 300;
-	font-family: "Comic Sans MS";
+	color: white;
 }
 .container {
 	margin: 0 auto;
 	margin-top: 50px;
 	width: 500px;
-	border: 1px solid black;
-	border-radius: 7px;
-	background-color: #cfdef7;
+	border: thin solid #c0392b;
+	background-color: #484a4c;
 	font-size: 16px;
 	font-weight: 300;
-	font-family: "Comic Sans MS";
+	padding: 10px 15px;
+	color: white;
+	text-align: center;
+	text-transform: uppercase;
 }
-a {
-	color: #d1080f;
-}
+a { color: #e74c3c; }
