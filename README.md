@@ -5,7 +5,7 @@ Extensão para rastrear suas encomendas de forma simples e notificá-lo quando e
 
 • Suporte à códigos ilimitados e identificadores
 
-![alt tag](http://image.prntscr.com/image/343e6c09f1fe4a76a5a73c12a532406f.png)
+![alt tag](http://image.prntscr.com/image/a068d2c5838a4a6ab58b6845ef9b75fd.png)
 
 • Notificações na área de trabalho
 
@@ -17,11 +17,11 @@ Extensão para rastrear suas encomendas de forma simples e notificá-lo quando e
 
 • Notificações pendentes
 
-![alt tag](http://image.prntscr.com/image/df383d0051e045b1ae52f3a99fb7131e.png)
+![alt tag](http://image.prntscr.com/image/f5512904e5d843439781e30a190a52fc.png)
 
 • Listagem e remoção
 
-![alt tag](http://image.prntscr.com/image/ae4a5e051d604e0cbd583a9dce0f10bd.png)
+![alt tag](http://image.prntscr.com/image/64d8dd9f8fb046b3b93299a84ac3507e.png)
 
 ## Instalação
 • Baixe este repositório como ZIP
