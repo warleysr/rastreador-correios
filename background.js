@@ -113,7 +113,8 @@ function setPending(key) {
 function checkPendings() {
 	chrome.storage.local.get('PENDINGS', function(data) {
 		var current = data['PENDINGS'];
-  		if (typeof current !== 'undefined') {
+  		if (typeof current != 'undefined') {
+			if (current.length == 0) return;
   			var ba = chrome.browserAction;
   			ba.setBadgeBackgroundColor({color: [232, 6, 6, 128]});
   			ba.setBadgeText({text: '!'});
