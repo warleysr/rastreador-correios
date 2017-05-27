@@ -6,7 +6,7 @@
 		"storage",
 		"background",
 		"notifications",
-		"http://websro.correios.com.br/"
+		"http://www2.correios.com.br/"
 	],
 	"background": {
 		"scripts": ["background.js"]

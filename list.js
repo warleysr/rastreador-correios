@@ -1,4 +1,4 @@
-var BASE_URL = "http://websro.correios.com.br/sro_bin/txect01$.ResultList?P_LINGUA=001&P_ITEMCODE=";
+var BASE_URL = "http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm";
 
 window.onload = function() {
 	chrome.storage.local.get(null, function(data) {
@@ -12,8 +12,10 @@ window.onload = function() {
 			has = true;
 
 			var div = document.createElement("div");
-			div.innerHTML = "<b><a href='" + BASE_URL + element + "' target='_blank'>" 
-			+ element + "</a></b> (" + data[element] + ") <button class='btn'>DELETAR</button><br><br>";
+			div.innerHTML = "<form id='" + element + "' action='" + BASE_URL + "' method='POST' target='_blank'>" 
+							+ "<input type='hidden' name='Objetos' value='" + element + "'>" 
+							+ "<b><a href='#' class='redirect'>" + element + "</a></b> (" 
+							+ data[element] + ") <button class='btn'>DELETAR</button><br><br>";
 
 			document.getElementById("main").appendChild(div);
 
@@ -30,5 +32,13 @@ window.onload = function() {
 			div.innerHTML = "<b>Nenhum código adicionado. Adicione clicando no ícone da extensão.</b><br><br>";
 			document.getElementById("main").appendChild(div);
 		}
+		var links = document.getElementsByClassName('redirect');
+        for(var i = 0; i < links.length; i++) {
+            var link = links[i];
+            link.onclick = function() {
+            	var id = link.text;
+            	document.getElementById(id).submit();
+            }
+        }
 	});
 }

@@ -1,4 +1,4 @@
-var BASE_URL = "http://websro.correios.com.br/sro_bin/txect01$.ResultList?P_LINGUA=001&P_ITEMCODE=";
+var BASE_URL = "http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm";
 
 checkPendings();
 
@@ -14,14 +14,18 @@ function checkUpdates() {
 
 			var key = element;
 
-			var xhr = createCORSRequest("GET", BASE_URL + key);
-
-			xhr.onload = function() {
-				var response = xhr.responseText;
-
+			fetch(BASE_URL, {  
+				method: 'POST',
+				headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+				body: 'Objetos=' + key
+			})
+			.then(function(response) {
+				return response.text();
+			})
+			.then(function(responseText) {
 				var parser = new DOMParser();
 
-				var doc = parser.parseFromString(response, "text/html");
+				var doc = parser.parseFromString(responseText, "text/html");
 
 				var tables = doc.getElementsByTagName('td');
 
@@ -42,57 +46,21 @@ function checkUpdates() {
 							message: "\"" + iden + "\" está cada vez mais próximo!\nClique aqui para visualizar.",
 							iconUrl: "icon.png"
 						}
+
 						chrome.notifications.create(key, opt);
 
-						chrome.notifications.onClicked.addListener(function(notificationId) {
-							// REMOVE PENDINGS
-							chrome.storage.local.get('PENDINGS', function(data) {
-								var str = data['PENDINGS'];
-								var keys = str.split(',');
-								var str = '';
-
-								keys.forEach(function(element, index, array) {
-									if (element.length != 13) return;
-									if (element === key) return;
-									str += element + ',';
-								});
-
-								chrome.storage.local.set({'PENDINGS': str}, function(){});
-
-								if (str.length === 0) {
-									var ba = chrome.browserAction;
-									ba.setBadgeBackgroundColor({color: [0, 0, 0, 0]});
-  									ba.setBadgeText({text: ''});
-								}
-							});
-				
-							if (notificationId == key) {
-								window.open(BASE_URL + key);
-							}
-						
-						});
-
 						setPending(key);
+
+						chrome.notifications.onClicked.addListener(function(notificationId) {
+							if (notificationId == key) {
+								window.open('pendings.html');
+							}
+						});
 					}
 				});
-			}
-
-			xhr.send();
+			});
 		});
 	});
-}
-
-function createCORSRequest(method, url) {
-  var xhr = new XMLHttpRequest();
-  if ("withCredentials" in xhr) {
-    xhr.open(method, url, true);
-  } else if (typeof XDomainRequest != "undefined") {
-    xhr = new XDomainRequest();
-    xhr.open(method, url);
-  } else {
-    xhr = null;
-  }
-  return xhr;
 }
 
 function setPending(key) {

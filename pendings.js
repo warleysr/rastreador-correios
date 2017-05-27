@@ -1,4 +1,4 @@
-var BASE_URL = "http://websro.correios.com.br/sro_bin/txect01$.ResultList?P_LINGUA=001&P_ITEMCODE=";
+var BASE_URL = "http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm";
 
 window.onload = function() {
 	var ba = chrome.browserAction;
@@ -15,15 +15,26 @@ window.onload = function() {
 	  		    keys.forEach(function(element, index, array) {
 	  		    	if (element.length != 13) return;
 	  		    	var div = document.createElement('div');
-	  		    	div.innerHTML = "<a href='" + BASE_URL + element + "' target='_blank'>" 
-	  		    	+ element + "</a> (" + data[element] + ")<br><br>"
+	  		    	div.innerHTML = "<form id='" + element + "' action='" + BASE_URL + "' method='POST' target='_blank'>" 
+                              + "<input type='hidden' name='Objetos' value='" + element + "'>" 
+                              + "<b><a href='#' class='redirect'>" + element + "</a></b> (" 
+                              + data[element] + ")<br><br>";
 	  				main.appendChild(div);
 	  				has = true;
 	  		    });
 	  		}
   		    var extra = document.createElement('div');
   		    if (has) {
-  		    	extra.innerHTML = "<b>Clique nos links acima para ver as mudanças!</b><br><br>";
+  		    	extra.innerHTML = "<b>Clique nos links acima para acompanhar!</b><br><br>";
+
+            var links = document.getElementsByClassName('redirect');
+            for(var i = 0; i < links.length; i++) {
+                var link = links[i];
+                link.onclick = function() {
+                  var id = link.text;
+                  document.getElementById(id).submit();
+                }
+            }
   		    } else {
   		    	extra.innerHTML = "<b>Nenhuma notificação pendente!</b><br><br>";
   		    }

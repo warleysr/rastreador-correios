@@ -1,4 +1,4 @@
-var BASE_URL = "http://websro.correios.com.br/sro_bin/txect01$.ResultList?P_LINGUA=001&P_ITEMCODE=";
+var BASE_URL = "http://www2.correios.com.br/sistemas/rastreamento/resultado_semcontent.cfm";
 
 window.onload = function() {
 	get('list').onclick = function() {
@@ -20,15 +20,18 @@ window.onload = function() {
 		}
 
 		keyExists(code, function() {
-
-			var xhr = createCORSRequest("GET", BASE_URL + code);
-
-			xhr.onload = function() {
-				var response = xhr.responseText;
-
+			fetch(BASE_URL, {  
+				method: 'POST',
+				headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+				body: 'Objetos=' + code
+			})
+			.then(function(response) {
+				return response.text();
+			})
+			.then(function(responseText) {
 				var parser = new DOMParser();
 
-				var doc = parser.parseFromString(response, "text/html");
+				var doc = parser.parseFromString(responseText, "text/html");
 
 				var tables = doc.getElementsByTagName('td');
 
@@ -36,16 +39,13 @@ window.onload = function() {
 					var obj = {}
 					obj[code] = iden;
 					obj[code + "_size"] = tables.length;
-					console.log(obj);
 					chrome.storage.local.set(obj, function() {
 						showInfo("Adicionado com sucesso!");
 					});
 				} else {
 					showInfo("Este código não é válido!", true);
 				}
-			}
-
-			xhr.send();
+			});
 		});
 	}
 }
@@ -83,17 +83,4 @@ function hideInfo() {
 	setTimeout(function() {
 		get('info').style.display = "none";
 	}, 3000);
-}
-
-function createCORSRequest(method, url) {
-  var xhr = new XMLHttpRequest();
-  if ("withCredentials" in xhr) {
-    xhr.open(method, url, true);
-  } else if (typeof XDomainRequest != "undefined") {
-    xhr = new XDomainRequest();
-    xhr.open(method, url);
-  } else {
-    xhr = null;
-  }
-  return xhr;
 }
